@@ -1,9 +1,9 @@
-const { contacts } = require("../../data");
+const { contacts: service } = require("../../services");
 
 const del = async (req, res, next) => {
   try {
     const { contactId } = await req.params;
-    const contact = await contacts.removeContact(contactId);
+    const contact = await service.removeContact(contactId);
 
     if (contact) {
       return res.status(200).json({

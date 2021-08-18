@@ -1,10 +1,9 @@
-const { contacts } = require("../../data");
+const { contacts: service } = require("../../services");
 
 const getById = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const contact = await contacts.getContactById(contactId);
-
+    const contact = await service.getContactById(contactId);
     if (!contact) {
       return res.status(404).json({
         status: "error",

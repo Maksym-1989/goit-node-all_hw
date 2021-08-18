@@ -1,11 +1,10 @@
-const { contacts } = require("../../data");
+const { contacts: service } = require("../../services");
 
 const update = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const { body } = req;
-
-    const updateContact = await contacts.updateContact(contactId, body);
+    const updateContact = await service.updateContact(contactId, body);
 
     if (!updateContact) {
       res.status(404).json({
