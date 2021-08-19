@@ -1,14 +1,12 @@
-const { contacts } = require("../../data");
-
+const { contacts: service } = require("../../services");
 const add = async (req, res, next) => {
   try {
-    const newContact = await contacts.addContact(req.body);
-
-    res.json({
+    const result = await service.addContact(req.body);
+    res.status(201).json({
       status: "success",
       code: 201,
       data: {
-        result: newContact,
+        result: result,
       },
     });
   } catch (error) {

@@ -5,7 +5,10 @@ const contactSchema = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
     .required(),
-  phone: Joi.number().min(1),
+  phone: Joi.string()
+    .pattern(/[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}/)
+    .required(),
+  favorite: Joi.boolean(),
 });
 
 const validateContact = (req, res, next) => {
