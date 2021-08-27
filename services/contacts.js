@@ -27,9 +27,11 @@ const removeContact = async (contactId, ownerId) => {
 };
 
 const addContact = async (body) => {
-  const user = await Contact.find({ email: body.email });
+  const user = await Contact.find({ email: body.email }, { new: true });
 
-  if (user) return false;
+  if (user.length > 0) {
+    return false;
+  }
 
   const result = await Contact.create(body);
   return result;
