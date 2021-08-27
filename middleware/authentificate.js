@@ -19,7 +19,7 @@ const authentificate = async (req, res, next) => {
     const { id } = jwt.verify(token, SECRET_KEY);
 
     const user = await service.getById(id);
-    
+
     if (!user || !user.token) {
       return res.status(401).json({
         status: "error",

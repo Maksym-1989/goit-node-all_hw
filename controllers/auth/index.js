@@ -7,5 +7,5 @@ module.exports = {
   signup,
   signin,
   logout,
-  getCurrentUser
+  getCurrentUser,
 };

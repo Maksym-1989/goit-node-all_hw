@@ -13,6 +13,11 @@ router.delete("/:contactId", authentificate, ctrl.del);
 
 router.put("/:contactId", authentificate, validateContact, ctrl.update);
 
-router.patch("/:contactId/favorite", authentificate, validateContact, ctrl.update);
+router.patch(
+  "/:contactId/favorite",
+  authentificate,
+  validateContact,
+  ctrl.update
+);
 
 module.exports = router;

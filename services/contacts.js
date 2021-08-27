@@ -17,8 +17,7 @@ const getContactById = async (contactId, ownerId) => {
 };
 
 const removeContact = async (contactId, ownerId) => {
-
-  const filter = { _id: contactId, owner: ownerId }
+  const filter = { _id: contactId, owner: ownerId };
   const user = await Contact.findById(filter);
 
   if (!user || user.length < 1) return false;
@@ -28,7 +27,7 @@ const removeContact = async (contactId, ownerId) => {
 };
 
 const addContact = async (body) => {
-  const user = await Contact.find({email:body.email});
+  const user = await Contact.find({ email: body.email });
 
   if (user) return false;
 
@@ -37,7 +36,7 @@ const addContact = async (body) => {
 };
 
 const updateContact = async (contactId, body, ownerId) => {
-  const filter = { _id: contactId, owner: ownerId }
+  const filter = { _id: contactId, owner: ownerId };
   const user = await Contact.findById(filter);
 
   if (!user || user.length < 1) return false;

@@ -2,9 +2,9 @@ const { contacts: service } = require("../../services");
 
 const getAll = async (req, res, next) => {
   try {
-    const {page = 1, limit = 10} = req.query;
+    const { page = 1, limit = 10 } = req.query;
     const filter = { owner: req.user._id };
-    const result = await service.listContacts({page, limit},filter);
+    const result = await service.listContacts({ page, limit }, filter);
 
     res.json({
       status: "success",

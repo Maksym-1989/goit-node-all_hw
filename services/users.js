@@ -5,7 +5,6 @@ const getOne = (filter) => {
 };
 
 const getById = (id) => {
-  
   return User.findById(id);
 };
 

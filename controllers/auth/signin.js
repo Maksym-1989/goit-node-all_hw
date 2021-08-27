@@ -19,8 +19,8 @@ const signin = async (req, res, next) => {
     };
     const { SECRET_KEY } = process.env;
     const token = jwt.sign(payload, SECRET_KEY);
-    
-    await service.update(user._id, { token })
+
+    await service.update(user._id, { token });
 
     res.json({
       status: "success",

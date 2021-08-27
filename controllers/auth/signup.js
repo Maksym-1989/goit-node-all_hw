@@ -2,7 +2,7 @@ const { users: service } = require("../../services");
 
 const signup = async (req, res, next) => {
   try {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
     const user = await service.getOne({ email });
     if (user) {
       return res.status(409).json({
@@ -16,7 +16,7 @@ const signup = async (req, res, next) => {
     res.status(201).json({
       status: "success",
       code: 201,
-      message: 'Success register',
+      message: "Success register",
     });
   } catch (error) {
     next(error);
