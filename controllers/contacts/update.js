@@ -4,7 +4,9 @@ const update = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const { body } = req;
-    const updateContact = await service.updateContact(contactId, body);
+    const ownerId = req.user._id;
+
+    const updateContact = await service.updateContact(contactId, body, ownerId);
 
     if (!updateContact) {
       res.status(404).json({

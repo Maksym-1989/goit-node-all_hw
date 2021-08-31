@@ -3,7 +3,8 @@ const { contacts: service } = require("../../services");
 const del = async (req, res, next) => {
   try {
     const { contactId } = await req.params;
-    const contact = await service.removeContact(contactId);
+    const ownerId = req.user._id;
+    const contact = await service.removeContact(contactId, ownerId);
 
     if (contact) {
       return res.status(200).json({

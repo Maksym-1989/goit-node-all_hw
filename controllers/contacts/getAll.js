@@ -2,8 +2,17 @@ const { contacts: service } = require("../../services");
 
 const getAll = async (req, res, next) => {
   try {
-    const allContacts = await service.listContacts();
-    res.json({ status: "success", code: 200, data: { result: allContacts } });
+    const { page = 1, limit = 10 } = req.query;
+    const filter = { owner: req.user._id };
+    const result = await service.listContacts({ page, limit }, filter);
+
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        result,
+      },
+    });
   } catch (error) {
     next(error);
   }
