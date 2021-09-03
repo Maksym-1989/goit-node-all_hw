@@ -1,4 +1,5 @@
 const { users: service } = require("../../services");
+const gravatar = require("gravatar");
 
 const signup = async (req, res, next) => {
   try {
@@ -11,7 +12,7 @@ const signup = async (req, res, next) => {
         message: "Already register",
       });
     }
-
+    req.body.avatarURL = gravatar.url(email);
     await service.add(req.body);
     res.status(201).json({
       status: "success",
