@@ -1,5 +1,8 @@
 const { users: service } = require("../../services");
 const gravatar = require("gravatar");
+const { sendgridEmail } = require("../../utils");
+const { v4: uuidv4 } = require("uuid");
+require("dotenv").config();
 
 const signup = async (req, res, next) => {
   try {
@@ -13,11 +16,23 @@ const signup = async (req, res, next) => {
       });
     }
     req.body.avatarURL = gravatar.url(email);
-    await service.add(req.body);
+    const verifyToken = uuidv4();
+    const { email: userEmail } = await service.add({ ...req.body, verifyToken });
+    
+    const { URL } = process.env;
+
+    const userSendEmail = {
+      to: userEmail,
+      subject: "Verify email",
+      html: `<a href="${URL}/api/v1/auth/verify/${verifyToken}" target="_blank">Verify email</a>`,
+    };
+   
+    await sendgridEmail(userSendEmail);
+
     res.status(201).json({
       status: "success",
       code: 201,
-      message: "Success register",
+      message: "Success register. Verify your mail",
     });
   } catch (error) {
     next(error);

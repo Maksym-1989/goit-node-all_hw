@@ -5,12 +5,20 @@ const signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await service.getOne({ email });
+    console.log(user)
 
     if (!user || !user.comparePassword(password)) {
       return res.status(400).json({
         status: "error",
         code: 400,
         message: "Wrong email or password",
+      });
+    }
+    if (!user.verify) {
+      return res.status(400).json({
+        status: "error",
+        code: 400,
+        message: "Verify your mail",
       });
     }
 
