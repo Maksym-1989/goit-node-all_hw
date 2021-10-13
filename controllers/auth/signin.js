@@ -5,7 +5,6 @@ const signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await service.getOne({ email });
-    console.log(user)
 
     if (!user || !user.comparePassword(password)) {
       return res.status(400).json({

@@ -2,10 +2,11 @@ const { contacts: service } = require("../../services");
 
 const getById = async (req, res, next) => {
   try {
+    
     const { contactId } = req.params;
     const ownerId = req.user._id;
     const contact = await service.getContactById(contactId, ownerId);
-    if (!contact) {
+    if (contact.length===0) {
       return res.status(404).json({
         status: "error",
         code: 404,
